@@ -31,12 +31,17 @@ Run the app:
 ng serve
 Open in browser:
 http://localhost:4200
+
+
 Live ste:https://divyathomas-97.github.io/food-app/
+
+
 Configuration:
 AuthService: manages user login/registration (in-memory).
 CartService: manages cart items with reactive updates using BehaviorSubject.
 Menu API: menu data loaded from a mock API.
 Header Component: shows cart badge dynamically.
+
 
 Folder Structure:
 src/
