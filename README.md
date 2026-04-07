@@ -46,9 +46,15 @@ Header Component: shows cart badge dynamically.
 Folder Structure:
 src/
 ├─ app/
+
 │  ├─ core/services/   # AuthService, CartService
+
 │  ├─ features/
+
 │  │  ├─ menu/         # Menu component
+
 │  │  ├─ cart/         # Cart component
+
 │  │  ├─ auth/         # Login/Register components
+
 │  ├─ shared/          # Header component, shared modules
