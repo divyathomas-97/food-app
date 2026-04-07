@@ -1,0 +1,48 @@
+
+<app-header></app-header>
+<div class="filter-toggle">
+  <button [class.active]="filter === 'all'" (click)="setFilter('all')">
+    All
+  </button>
+
+  <button [class.active]="filter === 'veg'" (click)="setFilter('veg')">
+    Veg
+  </button>
+
+  <button [class.active]="filter === 'non-veg'" (click)="setFilter('non-veg')">
+    Non-Veg
+  </button>
+</div>
+<mat-tab-group mat-stretch-tabs>
+  <mat-tab *ngFor="let category of categories" [label]="category.name">
+    <div class="dish-card" *ngFor="let dish of category.dishes" [hidden]="!showDish(dish)">
+      <div class="dish-content">
+        <span class="food-dot" [ngClass]="dish.type === 'veg' ? 'veg' : 'non-veg'">
+        </span>
+        <div class="dish-info">
+          <h3>{{ dish.name }}
+          </h3>
+          <div class="price-calories">
+            <p>QAR {{ dish.price }}</p>
+            <p *ngIf="dish.calories">
+              {{ dish.calories }} calories
+            </p>
+          </div>
+          <p class="desc">{{ dish.description }}</p>
+          <p class="custom" *ngIf="dish.addoncat?.length">
+            Customizations Available
+          </p>
+
+          <div class="counter">
+            <button (click)="removeItem(dish)">-</button>
+            <span>{{ dish.count || 0 }}</span>
+            <button (click)="addItem(dish)">+</button>
+          </div>
+        </div>
+        <div class="dish-image">
+          <img [src]="dish.image" alt="{{ dish.name }}" />
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

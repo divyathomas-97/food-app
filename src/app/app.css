@@ -1,0 +1,10 @@
+.tabs {
+  display: flex;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .tabs {
+    font-size: 12px;
+  }
+}
