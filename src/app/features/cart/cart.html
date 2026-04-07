@@ -1,0 +1,41 @@
+
+<app-header></app-header>
+
+<div class="container">
+  <h2 class="title">Your Cart</h2>
+
+  <div *ngIf="cartItems.length === 0" class="empty">
+    Cart is empty
+  </div>
+
+  <div *ngFor="let item of cartItems" class="cart-card">
+    <div class="cart-content">
+
+      <div class="cart-info">
+        <h3>{{ item.name }}</h3>
+
+        <p class="price">QAR {{ item.price }}</p>
+
+        <div class="counter">
+          <button (click)="removeItem(item)">-</button>
+          <span>{{ item.count || 0 }}</span>
+          <button (click)="addItem(item)">+</button>
+        </div>
+      </div>
+
+      <div class="cart-image">
+        <img [src]="item.image" alt="{{ item.name }}" />
+      </div>
+
+    </div>
+
+    <div class="item-total">
+      QAR {{ item.price * item.count }}
+    </div>
+  </div>
+
+  <div class="total-box" *ngIf="cartItems.length > 0">
+    <h3>Total: QAR {{ getTotal() }}</h3>
+    <button mat-raised-button color="primary" (click)="checkout()">Checkout</button>
+  </div>
+</div>
