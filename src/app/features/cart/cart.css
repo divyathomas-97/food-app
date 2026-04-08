@@ -86,3 +86,14 @@
   align-items: center;
 }
 
+[dir="rtl"] .cart-content {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .cart-info {
+  text-align: right;
+}
+
+[dir="rtl"] .item-total {
+  text-align: left;
+}

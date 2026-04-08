@@ -4,12 +4,14 @@ import { CartService, CartItem } from '../../core/services/cart.service';
 import { Header } from '../../shared/components/header/header';
 import { SharedModule } from '../../shared/shared.module';
 import { Router } from '@angular/router';
+import { LanguageService } from '../../core/services/language.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule,SharedModule, Header],
+  imports: [CommonModule, SharedModule, Header, TranslateModule],
   templateUrl: './cart.html',
   styleUrls: ['./cart.css']
 })
@@ -19,7 +21,8 @@ export class Cart implements OnInit {
   cartCount: number = 0;
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    public langService: LanguageService
   ) { }
 
   ngOnInit() {
@@ -28,6 +31,12 @@ export class Cart implements OnInit {
       this.cartCount = this.cartService.getTotalCount();
       this.cartItems = items;
     });
+  }
+
+  getName(item: any) {
+    return this.langService.getLang() === 'ar'
+      ? item.name_ar
+      : item.name_en;
   }
 
   addItem(item: CartItem) {
@@ -44,7 +53,8 @@ export class Cart implements OnInit {
     return this.cartService.getTotalPrice();
   }
 
- checkout() {
+  checkout() {
     this.cartService.clearCart();
     this.router.navigate(['/menu']);
-    }}
+  }
+}
