@@ -11,7 +11,7 @@ Features include:
 - Checkout with total price
 
 
-Note: Multilingual support (English/Arabic) was planned but not implemented yet. Translation files and RTL support can be added in the future using ngx-translate.
+Note: Translation feature (English/Arabic) has been implemented and pushed to a separate branch: feature/translator
 
 Dependencies: 
 - Angular 21
@@ -19,7 +19,8 @@ Dependencies:
 - RxJS (BehaviorSubject)
 - Angular Router
 - FormsModule & ReactiveFormsModule
-- Installed @ngx-translate/core @ngx-translate/http-loader
+- @ngx-translate/core
+- @ngx-translate/http-loader
 
 Setup:
 Clone the repo:
