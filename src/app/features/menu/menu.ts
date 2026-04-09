@@ -57,7 +57,7 @@ export class Menu implements OnInit {
 
     loadMenu() {
     console.log('111', this.categories);
-    this.http.get<Category[]>('https://mocki.io/v1/c1b3cc6b-68ee-48b2-8ff4-6880ed40321e').pipe(
+    this.http.get<Category[]>('https://mocki.io/v1/e7ca1135-b9bc-4be1-abe3-f43aaccbc1be').pipe(
       map(categories => {
         console.log(categories);
 

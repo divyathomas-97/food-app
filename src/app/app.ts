@@ -6,14 +6,14 @@ import { LanguageService } from './core/services/language.service';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  template: `<router-outlet></router-outlet>`
+  templateUrl: './app.html',
 })
 export class App {
 
   constructor(private langService: LanguageService) {}
 
 ngOnInit() {
-  this.langService.init(); // ✅ safe place
+  this.langService.init(); 
 }
 
 }
