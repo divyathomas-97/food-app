@@ -1,10 +1,13 @@
 import { Injectable, signal } from '@angular/core';
-
+interface User {
+  username: string;
+  password: string;
+}
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  users = signal<any[]>([]);
+  users = signal<User[]>([]);
 
-  register(user: any) {
+  register(user: User) {
     this.users.update(u => [...u, user]);
   }
 
