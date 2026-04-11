@@ -33,7 +33,7 @@ export class Cart implements OnInit {
     });
   }
 
-  getName(item: any) {
+  getName(item: CartItem) {
     return this.langService.getLang() === 'ar'
       ? item.name_ar
       : item.name_en;
