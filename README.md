@@ -36,6 +36,8 @@ http://localhost:4200
 
 Live ste:https://divyathomas-97.github.io/food-app/
 
+Translator:https://divyathomas-97.github.io/food-app-translator/
+
 
 Configuration:
 AuthService: manages user login/registration (in-memory).
