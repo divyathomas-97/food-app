@@ -66,7 +66,7 @@ export class Menu implements OnInit {
     addItem(dish: Dish) {
     dish.count = (dish.count || 0) + 1;
     console.log(dish, dish.count);
-    this.cartService.addItem({ ...dish, count: dish.count ? dish.count + 1 : 1 });
+    this.cartService.addItem({ ...dish, count: dish.count });
     this.updateCart();
   }
 
