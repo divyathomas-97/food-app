@@ -5,8 +5,6 @@
 
 .dish-content {
   display: flex;
-  /* justify-content: space-between;
-  align-items: flex-start; */
 }
 
 .dish-info {
@@ -43,9 +41,6 @@
 }
 
 .counter {
-  /* display: flex;
-  align-items: center;
-  margin-top: 8px; */
   display: inline-flex;
   align-items: center;
   background-color: #2e7d32;
@@ -74,7 +69,6 @@
 .dish-image img {
   width: 70px;
   height: 70px;
-  /* border-radius: 8px; */
   object-fit: cover;
 }
 
@@ -113,9 +107,16 @@
 
 .filter-toggle button.active {
   background-color: #2e7d32;
-  /* green */
   color: #fff;
   border-color: #2e7d32;
+}
+
+[dir="rtl"] .dish-content {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .dish-info {
+  text-align: right;
 }
 
 @media (min-width: 600px) {

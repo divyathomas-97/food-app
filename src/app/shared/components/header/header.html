@@ -1,13 +1,24 @@
-
 <header class="header">
+
     <button mat-icon-button (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
     </button>
-    <h1>UNI RESTO CAFE</h1>
+
+
+    <h1>{{ 'TITLE' | translate }}</h1>
+
     <div class="header-right">
-        <span class="my-orders">My Orders</span>
-        <button mat-icon-button [matBadge]="this.cartCount" matBadgeColor="warn" (click)="goToCart()">
+        <span class="my-orders">
+            {{ 'MY_ORDERS' | translate }}
+        </span>
+
+        <button mat-button (click)="switchLang(langService.getLang() === 'en' ? 'ar' : 'en')">
+            {{ langService.getLang() === 'en' ? 'AR' : 'EN' }}
+            <mat-icon>language</mat-icon>
+        </button>
+        <button mat-icon-button [matBadge]="cartCount" matBadgeColor="warn" (click)="goToCart()">
             <mat-icon>shopping_cart</mat-icon>
         </button>
     </div>
+
 </header>

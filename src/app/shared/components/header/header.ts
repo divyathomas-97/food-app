@@ -1,42 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatBadgeModule } from '@angular/material/badge';
 import { CartItem, CartService } from '../../../core/services/cart.service';
 import { Router } from '@angular/router';
-import { SharedModule } from '../../shared.module';
-
+import { LanguageService } from '../../../core/services/language.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { MATERIAL_MODULES } from '../../material';
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [CommonModule, SharedModule],
+    imports: [
+        CommonModule, 
+        ...MATERIAL_MODULES,
+        TranslateModule ],
     templateUrl: './header.html',
     styleUrls: ['./header.css']
-})
-export class Header implements OnInit {
 
+})
+
+export class Header implements OnInit {
     cartItems: CartItem[] = [];
     cartCount: number = 0;
-    constructor(
+
+constructor(
         private cartService: CartService,
         private location: Location, 
-        private router: Router
+        private router: Router,
+         public langService: LanguageService
     ) { }
 
-    ngOnInit() {
+ngOnInit() {
         this.cartService.cart.subscribe(items => {
-            console.log(items);
             this.cartCount = this.cartService.getTotalCount();
             this.cartItems = items;
         });
     }
 
-    goToCart() {
+ goToCart() {
         if (this.cartCount != 0) {
             this.router.navigate(['/cart']);
         }
+    }
+
+    switchLang(lang: string) {
+        this.langService.setLanguage(lang);
     }
 
     goBack() {

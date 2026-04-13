@@ -3,7 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 
 export interface CartItem {
   id: number;
-  name: string;
+  name_en: string;
+  name_ar: string;
   price: number;
   count: number;
   image?: string;
@@ -12,6 +13,7 @@ export interface CartItem {
 @Injectable({
   providedIn: 'root'
 })
+
 export class CartService {
   private cartItems: CartItem[] = [];
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
@@ -30,9 +32,7 @@ export class CartService {
 
   removeItem(item: CartItem) {
     const existing = this.cartItems.find(i => i.id === item.id);
-
     if (!existing) return;
-
     if (existing.count > 1) {
       existing.count--;
     } else {
@@ -41,17 +41,19 @@ export class CartService {
     this.cartSubject.next(this.cartItems);
   }
 
+
   getTotalCount(): number {
     return this.cartItems.reduce((acc, item) => acc + item.count, 0);
   }
+
 
   getTotalPrice(): number {
     return this.cartItems.reduce((acc, item) => acc + item.price * item.count, 0);
   }
   
-clearCart() {
-  this.cartItems = [];
-  this.cartSubject.next([]);
-}
- 
+  clearCart() {
+    this.cartItems = [];
+    this.cartSubject.next([]);
+  }
+
 }

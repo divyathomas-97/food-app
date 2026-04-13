@@ -1,26 +1,25 @@
-
 <app-header></app-header>
 <div class="filter-toggle">
   <button [class.active]="filter === 'all'" (click)="setFilter('all')">
-    All
+    {{ 'ALL' | translate }}
   </button>
 
   <button [class.active]="filter === 'veg'" (click)="setFilter('veg')">
-    Veg
+    {{ 'VEG' | translate }}
   </button>
 
   <button [class.active]="filter === 'non-veg'" (click)="setFilter('non-veg')">
-    Non-Veg
+    {{ 'NON_VEG' | translate }}
   </button>
 </div>
 <mat-tab-group mat-stretch-tabs>
-  <mat-tab *ngFor="let category of categories" [label]="category.name">
+  <mat-tab *ngFor="let category of categories" [label]="getCategoryName(category)">
     <div class="dish-card" *ngFor="let dish of category.dishes" [hidden]="!showDish(dish)">
       <div class="dish-content">
         <span class="food-dot" [ngClass]="dish.type === 'veg' ? 'veg' : 'non-veg'">
         </span>
         <div class="dish-info">
-          <h3>{{ dish.name }}
+          <h3>{{ getDishName(dish) }}
           </h3>
           <div class="price-calories">
             <p>QAR {{ dish.price }}</p>
@@ -28,9 +27,9 @@
               {{ dish.calories }} calories
             </p>
           </div>
-          <p class="desc">{{ dish.description }}</p>
+          <p class="desc">{{ getDishDesc(dish) }}</p>
           <p class="custom" *ngIf="dish.addoncat?.length">
-            Customizations Available
+            {{ 'CUSTOM' | translate }}
           </p>
 
           <div class="counter">
@@ -40,7 +39,7 @@
           </div>
         </div>
         <div class="dish-image">
-          <img [src]="dish.image" alt="{{ dish.name }}" />
+          <img [src]="dish.image" [alt]="getDishName(dish)" />
         </div>
       </div>
     </div>
