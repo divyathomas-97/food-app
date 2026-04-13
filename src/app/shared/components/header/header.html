@@ -13,7 +13,7 @@
         </span>
 
         <button mat-button (click)="switchLang(langService.getLang() === 'en' ? 'ar' : 'en')">
-            {{ langService.getLang() === 'en' ? 'AR' : 'EN' }}
+            {{ langService.getLang() === 'ar' ? 'AR' : 'EN' }}
             <mat-icon>language</mat-icon>
         </button>
         <button mat-icon-button [matBadge]="cartCount" matBadgeColor="warn" (click)="goToCart()">
