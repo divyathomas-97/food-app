@@ -42,7 +42,11 @@ export class Login {
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/menu';
       alert('Login Successful');
       this.router.navigate([returnUrl]);
-    } 
+    } else{
+      alert('Invalid username or password, Please register if you do not have an account');
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/register';
+      this.router.navigate([returnUrl]);
+    }
   }
 
   togglePassword() {
