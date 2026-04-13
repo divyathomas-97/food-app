@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { map } from 'rxjs/operators';
 import { CartService } from '../../core/services/cart.service';
 import { Header } from '../../shared/components/header/header';
-import { SharedModule } from '../../shared/shared.module';
 import { LanguageService } from '../../core/services/language.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { MenuService } from '../../core/services/menu.service';
+import { MATERIAL_MODULES } from '../../shared/material';
 
 interface Dish {
   id: number;
@@ -33,73 +32,64 @@ interface Category {
   selector: 'app-menu',
   standalone: true,
   imports:
-    [CommonModule,
-      SharedModule,
+    [
+      CommonModule,
+      ...MATERIAL_MODULES,
       Header,
       TranslateModule
     ],
   templateUrl: './menu.html',
   styleUrls: ['./menu.css'],
 })
+
 export class Menu implements OnInit {
   type: 'veg' | 'non-veg' = "veg";
   categories: Category[] = [];
   cartCount: number = 0;
+  filter: 'all' | 'veg' | 'non-veg' = 'all';
 
-  constructor(private http: HttpClient,
-    // private router: Router,
+  constructor(
     private cartService: CartService,
-  public langService: LanguageService) { }
+    private menuService: MenuService,
+    public langService: LanguageService
+) { }
 
   ngOnInit() {
     this.loadMenu();
   }
 
-    loadMenu() {
-    console.log('111', this.categories);
-    this.http.get<Category[]>('https://mocki.io/v1/e7ca1135-b9bc-4be1-abe3-f43aaccbc1be').pipe(
-      map(categories => {
-        console.log(categories);
-
-        return categories.map(category => ({
-          ...category,
-          dishes: category.dishes.map(d => ({ ...d, count: 0 })),
-        }));
-      })
-    ).subscribe(data => this.categories = data);
+  loadMenu() {
+    this.menuService.getMenu()
+    .subscribe(data => this.categories = data);
   }
 
   getCategoryName(category: Category) {
-  return this.langService.getLang() === 'ar'
-    ? category.name_ar
-    : category.name_en;
-}
+    return this.langService.getLang() === 'ar'
+      ? category.name_ar
+     : category.name_en;
+  }
 
-getDishName(dish: Dish) {
-  return this.langService.getLang() === 'ar'
-    ? dish.name_ar
-    : dish.name_en;
-}
+  getDishName(dish: Dish) {
+    return this.langService.getLang() === 'ar'
+      ? dish.name_ar
+      : dish.name_en;
+  }
 
-
-getDishDesc(dish: Dish) {
-  return this.langService.getLang() === 'ar'
-    ? dish.description_ar
-    : dish.description_en;
-}
+  getDishDesc(dish: Dish) {
+    return this.langService.getLang() === 'ar'
+      ? dish.description_ar
+      : dish.description_en;
+  }
 
     addItem(dish: Dish) {
-    dish.count = (dish.count || 0) + 1;
-    console.log(dish, dish.count);
-    this.cartService.addItem({ ...dish, count: dish.count ? dish.count + 1 : 1 });
-    this.updateCart();
+      dish.count = (dish.count || 0) + 1;
+      this.cartService.addItem({ ...dish, count: dish.count ? dish.count + 1 : 1 });
+      this.updateCart();
   }
 
 
   removeItem(dish: Dish) {
-    console.log("removed", dish.count);
     if (dish.count && dish.count > 0) {
-      console.log(dish, dish.count--);
       dish.count--;
       this.cartService.removeItem({ ...dish, count: dish.count });
       this.updateCart();
@@ -109,9 +99,6 @@ getDishDesc(dish: Dish) {
   updateCart() {
     this.cartCount = this.cartService.getTotalCount();
   }
-
-
-  filter: 'all' | 'veg' | 'non-veg' = 'all';
 
   setFilter(type: 'all' | 'veg' | 'non-veg') {
     this.filter = type;
@@ -123,8 +110,8 @@ getDishDesc(dish: Dish) {
   }
 
 
-switchLang(lang: string) {
-        this.langService.setLanguage(lang);
-    }
+  switchLang(lang: string) {
+          this.langService.setLanguage(lang);
+      }
 
 }

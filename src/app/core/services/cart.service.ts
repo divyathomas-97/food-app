@@ -13,6 +13,7 @@ export interface CartItem {
 @Injectable({
   providedIn: 'root'
 })
+
 export class CartService {
   private cartItems: CartItem[] = [];
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
@@ -49,7 +50,6 @@ export class CartService {
   getTotalPrice(): number {
     return this.cartItems.reduce((acc, item) => acc + item.price * item.count, 0);
   }
-
   
   clearCart() {
     this.cartItems = [];

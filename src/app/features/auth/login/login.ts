@@ -1,18 +1,19 @@
 import { Component, signal } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../shared/shared.module';
-
+import { MATERIAL_MODULES } from '../../../shared/material';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports:
-    [ReactiveFormsModule,
+    [
+      ReactiveFormsModule,
       CommonModule,
-      SharedModule],
+      ...MATERIAL_MODULES
+    ],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -25,12 +26,23 @@ export class Login {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+
+ onLogin() {
+    const { username, password } = this.loginForm.value;
+    const isAuthenticated = this.auth.login({ username, password });
+    if (isAuthenticated) {
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/menu';
+      alert('Login Successful');
+      this.router.navigate([returnUrl]);
+    } 
   }
 
   togglePassword() {
@@ -39,16 +51,6 @@ export class Login {
 
   hidePassword() {
     return this.hide();
-  }
-
-  onLogin() {
-    const { username, password } = this.loginForm.value;
-    if (this.auth.login(username!, password!)) {
-      alert('Login Successful');
-      this.router.navigate(['/menu']);
-    } else {
-      this.error = true;
-    }
   }
 
   goToRegister() {

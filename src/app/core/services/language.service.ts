@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class LanguageService {
-
   currentLang = 'en';
 
   constructor(private translate: TranslateService) {
@@ -27,7 +26,6 @@ init() {
       }
 
       document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
       localStorage.setItem('lang', lang);
 
     } catch (e) {
