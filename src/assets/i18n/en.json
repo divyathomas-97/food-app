@@ -1,4 +1,16 @@
 {
-  "welcome": "Welcome",
-  "login": "Login"
+  "TITLE": "UNI RESTO CAFE",
+  "MY_ORDERS": "My Orders",
+
+  "ALL": "All",
+  "VEG": "Veg",
+  "NON_VEG": "Non-Veg",
+
+  "CALORIES": "calories",
+  "CUSTOM": "Customizations Available",
+
+  "CART": "Your Cart",
+  "EMPTY_CART": "Cart is empty",
+  "TOTAL": "Total",
+  "CHECKOUT": "Checkout"
 }
