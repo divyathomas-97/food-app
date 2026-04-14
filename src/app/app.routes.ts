@@ -6,6 +6,10 @@ import { Register } from './features/auth/register/register';
 import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
+  { 
+    path: '**', 
+    redirectTo: 'login' 
+  },
   {
     path: 'login', 
     component: Login,
