@@ -10,7 +10,8 @@ export const appConfig: ApplicationConfig = {
 
     provideTranslateService({
       loader: provideTranslateHttpLoader({
-        prefix: '/assets/i18n/',
+        prefix: 'assets/i18n/',
+        // prefix: '/assets/i18n/', //for local purpose
         suffix: '.json'
       })
     })
