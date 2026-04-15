@@ -1,35 +1,43 @@
 <div class="page">
+  <div class="overlay"></div>
 
-    <mat-card class="card">
+  <mat-card class="card">
+    
+    <div class="icon">
+      <mat-icon>restaurant</mat-icon>
+    </div>
 
-        <h2>Register</h2>
+    <h2>Uni Resto Cafe</h2>
+    <p class="subtitle">Welcome! Please register to continue</p>
 
-        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
 
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Username</mat-label>
-                <input matInput formControlName="username">
-            </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Enter your username" formControlName="username">
+      </mat-form-field>
 
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Password</mat-label>
-                <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password">
-                <button mat-icon-button matSuffix type="button" (click)="togglePassword()">
-                    <mat-icon>{{ hidePassword() ? 'visibility' : 'visibility_off' }}</mat-icon>
-                </button>
-            </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix type="button" (click)="togglePassword()">
+          <mat-icon>{{ hidePassword() ? 'visibility' : 'visibility_off' }}</mat-icon>
+        </button>
 
-            <button mat-raised-button color="accent" class="full-width" [disabled]="registerForm.invalid">
-                Register
-            </button>
+      </mat-form-field>
 
-        </form>
+      <button class="login-btn" [disabled]="registerForm.invalid">
+        Register
+      </button>
 
-        <div class="footer">
-            <span>Already have an account?</span>
-            <a (click)="goToLogin()">Login</a>
-        </div>
+    </form>
 
-    </mat-card>
+    <p *ngIf="error" class="error">Invalid credentials</p>
 
+    <div class="footer">
+      <span>Already have an account?</span>
+      <a (click)="goToLogin()">Login</a>
+    </div>
+
+  </mat-card>
 </div>
