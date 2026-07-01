@@ -149,12 +149,4 @@ npx angular-cli-ghpages --dir=dist/food-app
 
 ---
 
-## 👩‍💻 Author
 
-**Divya Thomas**
-
----
-
-## 📄 License
-
-This project is for educational and evaluation purposes.
