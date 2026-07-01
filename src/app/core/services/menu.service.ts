@@ -7,16 +7,19 @@ import { map, Observable } from 'rxjs';
 })
 export class MenuService {
 
-  private apiUrl = 'https://mocki.io/v1/e7ca1135-b9bc-4be1-abe3-f43aaccbc1be';
+  // private apiUrl = 'https://mocki.io/v1/5f76de08-1d86-4eef-a094-dc998454005c';
 
   constructor(private http: HttpClient) {}
 
   getMenu(): Observable<any> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
+    return this.http.get<any[]>('assets/menu.json').pipe(
       map(categories =>
+        
         categories.map(category => ({
           ...category,
+
           dishes: category.dishes.map((d: any) => ({ ...d, count: 0 }))
+          
         }))
       )
     );
